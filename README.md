@@ -1,0 +1,1 @@
+# SZM-Vitalis
