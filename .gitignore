@@ -1,0 +1,35 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+app/build/
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+.kotlin/
+.agent/
+reports.zip
+
+# Python Virtual Environments & Caches
+backend/venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Node & Next.js
+frontend/node_modules/
+node_modules/
+frontend/.next/
+frontend/out/
+.next/
+*.log

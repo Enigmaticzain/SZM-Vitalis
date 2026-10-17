@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Disallow automatic cloud backup of sensitive physiological Room databases -->
+        <exclude domain="database" path="twin_database" />
+        <exclude domain="sharedpref" path="." />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="database" path="twin_database" />
+    </device-transfer>
+</data-extraction-rules>
