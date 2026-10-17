@@ -365,4 +365,19 @@ HEART_RATE,500,bpm,1773500060000
         val tachypnea = AdaptiveTwinEngine.getPopulationPercentile(StandardMetric.RESPIRATORY_RATE, 25.0)
         assertTrue(tachypnea.contains("Tachypnea Alert") || tachypnea.contains(">20"))
     }
+
+    @Test
+    fun testRespiratoryRateFileIngestionCsvAndJson() {
+        val connector = FileImportConnector()
+        val csv = """
+metric,value,unit,timestamp
+RR,15.5,br/min,1773000000000
+RESPIRATORY_RATE,17.0,breaths/min,1773000060000
+        """.trimIndent()
+
+        val summary = connector.parseCsv(csv)
+        assertEquals(2, summary.acceptedObservations.size)
+        assertEquals(StandardMetric.RESPIRATORY_RATE, summary.acceptedObservations[0].metricId)
+        assertEquals(15.5, summary.acceptedObservations[0].normalizedValue, 0.1)
+    }
 }

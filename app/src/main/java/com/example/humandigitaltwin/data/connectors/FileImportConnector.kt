@@ -36,7 +36,8 @@ class FileImportConnector : DeviceConnector {
         StandardMetric.STEPS,
         StandardMetric.BODY_WEIGHT,
         StandardMetric.SPO2,
-        StandardMetric.SLEEP_DURATION
+        StandardMetric.SLEEP_DURATION,
+        StandardMetric.RESPIRATORY_RATE
     )
 
     private val _state = MutableStateFlow(ConnectorState.DISCONNECTED)
@@ -255,6 +256,7 @@ class FileImportConnector : DeviceConnector {
             s.contains("SLEEP") -> StandardMetric.SLEEP_DURATION
             s.contains("CALORIE") || s.contains("KCAL") -> StandardMetric.ACTIVE_CALORIES
             s.contains("HRV") -> StandardMetric.HRV_RMSSD
+            s.contains("RESPIRAT") || s == "RR" || s.contains("BREATH") -> StandardMetric.RESPIRATORY_RATE
             else -> try { StandardMetric.valueOf(s) } catch (e: Exception) { null }
         }
     }
@@ -262,6 +264,7 @@ class FileImportConnector : DeviceConnector {
     private fun parseUnit(str: String): StandardUnit {
         val s = str.uppercase().replace("/", "_").replace("°", "")
         return when {
+            s.contains("BREATH") || s.contains("BR_MIN") || s.contains("BRMIN") || s.contains("RPM") -> StandardUnit.BREATHS_PER_MINUTE
             s.contains("BPM") -> StandardUnit.BPM
             s.contains("MMOL") -> StandardUnit.MMOL_L
             s.contains("MG_DL") || s.contains("MGDL") -> StandardUnit.MG_DL
