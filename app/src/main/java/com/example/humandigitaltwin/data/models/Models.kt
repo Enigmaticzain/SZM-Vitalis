@@ -16,7 +16,9 @@ data class WearableDataPoint(
     val respiratory_rate_predicted: Double = 15.8,
     val respiratory_rate_confidence: Double = 94.2,
     val respiratory_rate_uncertainty: Double = 1.2,
-    val respiratory_rate_status: String = "Within Reference Range (12–20)"
+    val respiratory_rate_status: String = "Within Reference Range (12–20)",
+    val is_predicted: Boolean = true,
+    val provenance_source: String = "PhysioNet BIDMC / CapnoBase RSA Model"
 )
 
 @Serializable
@@ -45,14 +47,18 @@ data class SimulationResult(
     val predicted_glucose_peak: Double,
     val predicted_recovery_time_hours: Double,
     val recommendations: List<String>,
-    val time_series_projection: List<TimeSeriesPoint>
+    val time_series_projection: List<TimeSeriesPoint>,
+    val predicted_respiratory_peak: Double = 16.0,
+    val predicted_heart_rate_peak: Double = 64.0
 )
 
 @Serializable
 data class TimeSeriesPoint(
     val hour: Int,
     val simulated_health_score: Double,
-    val simulated_glucose: Double
+    val simulated_glucose: Double,
+    val simulated_respiratory_rate: Double = 16.0,
+    val simulated_heart_rate: Double = 64.0
 )
 
 @Serializable

@@ -16,7 +16,9 @@ def get_hospital_status():
         hr=vitals.heart_rate,
         glucose=vitals.blood_glucose,
         stress=vitals.stress_level,
-        recovery=75.0
+        recovery=75.0,
+        rr=vitals.respiratory_rate or 16.0,
+        spo2=98.0
     )
     return {
         "unit": "ICU / Telemetry Unit 4B",

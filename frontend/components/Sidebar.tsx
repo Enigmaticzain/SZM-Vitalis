@@ -1,12 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
-import { LayoutDashboard, Radio, Sliders, Utensils, MessageSquare, FileText } from 'lucide-react';
+import { LayoutDashboard, Radio, Sliders, Utensils, MessageSquare, FileText, Activity, Stethoscope } from 'lucide-react';
 
 export default function Sidebar() {
   const navItems = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+    { name: 'Deep Vitals Hub', href: '/vitals', icon: Activity },
     { name: 'Wearable Simulator', href: '/simulator', icon: Radio },
     { name: 'What-If Simulations', href: '/simulations', icon: Sliders },
+    { name: 'Clinical Portal', href: '/clinical', icon: Stethoscope },
     { name: 'Nutrition & Glucose', href: '/nutrition', icon: Utensils },
     { name: 'Twin AI Coach', href: '/chat', icon: MessageSquare },
     { name: 'Lab Reports', href: '/reports', icon: FileText },

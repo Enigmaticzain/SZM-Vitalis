@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.DirectionsWalk
+import androidx.compose.material.icons.automirrored.rounded.ShowChart
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -56,13 +58,22 @@ fun SimulatorScreen(viewModel: DigitalTwinViewModel) {
             VitalCard(title = "Heart Rate", value = "${wearable?.heart_rate ?: 0.0}", unit = "bpm", icon = Icons.Rounded.Favorite, description = "Realtime stream")
         }
         item {
-            VitalCard(title = "HRV", value = "${wearable?.hrv ?: 0.0}", unit = "ms", icon = Icons.Rounded.ShowChart, description = "Autonomic tracking")
+            VitalCard(title = "HRV", value = "${wearable?.hrv ?: 0.0}", unit = "ms", icon = Icons.AutoMirrored.Rounded.ShowChart, description = "Autonomic tracking")
+        }
+        item {
+            VitalCard(
+                title = "Respiratory Rate",
+                value = String.format("%.1f", wearable?.respiratory_rate ?: 16.0),
+                unit = "br/min",
+                icon = Icons.Rounded.Air,
+                description = if (wearable?.is_predicted == true) "Predicted via RSA (±1.2 br/min)" else "Continuous sensor stream"
+            )
         }
         item {
             VitalCard(title = "Blood Glucose", value = "${wearable?.blood_glucose ?: 0.0}", unit = "mg/dL", icon = Icons.Rounded.Bolt, description = "Continuous glucose sensor")
         }
         item {
-            VitalCard(title = "Daily Steps", value = "${wearable?.steps ?: 0}", unit = "steps", icon = Icons.Rounded.DirectionsWalk, description = "Step counter")
+            VitalCard(title = "Daily Steps", value = "${wearable?.steps ?: 0}", unit = "steps", icon = Icons.AutoMirrored.Rounded.DirectionsWalk, description = "Step counter")
         }
     }
 }

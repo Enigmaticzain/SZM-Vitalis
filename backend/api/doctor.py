@@ -18,9 +18,9 @@ patients_db = [
         "risk_status": "Stable",
         "health_score": 88.5,
         "recovery_index": 82.0,
-        "latest_vitals": {"hr": 64.0, "glucose": 92.0, "bp": "120/80"},
+        "latest_vitals": {"hr": 64.0, "glucose": 92.0, "bp": "120/80", "rr": 16.0, "spo2": 99.0},
         "trajectory": [85.0, 86.2, 87.0, 88.5],
-        "clinical_notes": "Recovering well post-monitoring. Vitals stable."
+        "clinical_notes": "Recovering well post-monitoring. Vitals and respiratory parameters within resting reference range."
     },
     {
         "patient_id": "patient_002",
@@ -29,9 +29,9 @@ patients_db = [
         "risk_status": "Warning",
         "health_score": 68.0,
         "recovery_index": 54.0,
-        "latest_vitals": {"hr": 98.0, "glucose": 155.0, "bp": "138/88"},
+        "latest_vitals": {"hr": 98.0, "glucose": 155.0, "bp": "138/88", "rr": 22.0, "spo2": 95.0},
         "trajectory": [75.0, 72.0, 70.0, 68.0],
-        "clinical_notes": "Elevated glucose and heart rate observed during afternoon hours. Nurse review flagged."
+        "clinical_notes": "Mild tachypnea (22 br/min) and postprandial glucose elevation observed during afternoon hours. Nurse review flagged."
     },
     {
         "patient_id": "patient_003",
@@ -40,9 +40,9 @@ patients_db = [
         "risk_status": "Critical",
         "health_score": 42.5,
         "recovery_index": 31.0,
-        "latest_vitals": {"hr": 128.0, "glucose": 210.0, "bp": "155/98"},
+        "latest_vitals": {"hr": 128.0, "glucose": 210.0, "bp": "155/98", "rr": 28.0, "spo2": 89.0},
         "trajectory": [60.0, 52.0, 48.0, 42.5],
-        "clinical_notes": "Level 4 Emergency Escalation triggered due to acute tachycardia and hyperglycemia."
+        "clinical_notes": "Level 4 Emergency Escalation triggered due to acute tachypnea (28 br/min), hypoxemia (SpO2 89%), tachycardia, and hyperglycemia (NEWS2 Score: 9)."
     }
 ]
 
@@ -58,7 +58,7 @@ def get_doctor_alerts():
             "patient_id": "patient_003",
             "patient_name": "Marcus Vance",
             "severity": "CRITICAL",
-            "message": "Heart rate sustained > 120 bpm, glucose spike to 210 mg/dL.",
+            "message": "Critical tachypnea (28 br/min) and hypoxemia (SpO2 89%) accompanied by tachycardia (>120 bpm). Immediate respiratory therapy review required.",
             "timestamp": datetime.now().isoformat()
         },
         {
@@ -66,7 +66,7 @@ def get_doctor_alerts():
             "patient_id": "patient_002",
             "patient_name": "Sarah Jenkins",
             "severity": "WARNING",
-            "message": "Elevated stress level and resting HR anomaly.",
+            "message": "Elevated respiratory rate (22 br/min) above resting threshold (12–20 br/min) with elevated stress index.",
             "timestamp": datetime.now().isoformat()
         }
     ]

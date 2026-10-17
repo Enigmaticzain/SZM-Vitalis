@@ -46,6 +46,8 @@ export interface RespiratoryTelemetry {
   clinical_disclaimer: string;
 }
 
+export type RespiratoryHistoryData = RespiratoryTelemetry;
+
 export interface TwinState {
   user_id: string;
   health_score: number;

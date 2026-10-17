@@ -29,6 +29,7 @@ class WearableDataPoint(BaseModel):
     respiratory_rate_uncertainty: Optional[float] = 1.2
     respiratory_rate_status: Optional[str] = "Within Reference Range"
     respiratory_rate_source: Optional[str] = "Predicted (Model v1.0)"
+    is_predicted: Optional[bool] = True
 
 class RespiratoryPredictionRequest(BaseModel):
     heart_rate: float
@@ -81,6 +82,8 @@ class SimulationResult(BaseModel):
     predicted_recovery_time_hours: float
     recommendations: List[str]
     time_series_projection: List[Dict[str, Any]]
+    predicted_respiratory_peak: Optional[float] = 16.0
+    predicted_heart_rate_peak: Optional[float] = 64.0
 
 class NutritionLog(BaseModel):
     meal_name: str

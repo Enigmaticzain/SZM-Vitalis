@@ -45,6 +45,47 @@ export default function ReportsPage() {
             <input type="file" onChange={handleUpload} className="hidden" accept=".pdf,.png,.jpg,.jpeg" />
           </label>
           {loading && <p className="text-center text-cyan-400 text-sm animate-pulse">Parsing lab biomarkers via AI engine...</p>}
+
+          <div className="pt-2 border-t border-slate-800 space-y-2">
+            <span className="text-xs font-semibold text-slate-400 block">Or Test With Sample Clinical Panels:</span>
+            <div className="space-y-1.5">
+              <button
+                type="button"
+                onClick={() => {
+                  setLoading(true);
+                  const sampleText = "Patient: Alex Mercer\nFasting Glucose: 91.0 mg/dL\nHbA1c: 5.2%\nTotal Cholesterol: 182.0 mg/dL\nLDL Cholesterol: 96.0 mg/dL\nHDL Cholesterol: 66.0 mg/dL\nTriglycerides: 90.0 mg/dL\nhs-CRP: 0.5 mg/L\nVitamin D: 54.0 ng/mL\nRespiratory Rate: 16.0 br/min\nSpO2: 99.0%";
+                  const blob = new Blob([sampleText], { type: 'text/plain' });
+                  const formData = new FormData();
+                  formData.append('file', blob, 'Quest_Comprehensive_Metabolic_Panel.txt');
+                  apiClient.post('/api/reports/parse', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                    .then((res) => { setReportResult(res.data); setLoading(false); })
+                    .catch(() => setLoading(false));
+                }}
+                className="w-full text-left px-3 py-2 bg-slate-950 hover:bg-slate-800/80 border border-slate-800 rounded-xl text-xs text-slate-300 transition-colors flex items-center justify-between"
+              >
+                <span>Comprehensive Metabolic & Lipid Panel</span>
+                <span className="text-[10px] text-teal-400 font-mono">10 Biomarkers</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setLoading(true);
+                  const sampleText = "Patient: Marcus Vance\nRespiratory Rate: 28.0 br/min\nSpO2: 89.0%\nFasting Glucose: 215.0 mg/dL\nhs-CRP: 4.8 mg/L\nWBC Count: 13.5 k/uL\nHemoglobin: 11.8 g/dL";
+                  const blob = new Blob([sampleText], { type: 'text/plain' });
+                  const formData = new FormData();
+                  formData.append('file', blob, 'Hospital_ICU_Arterial_Emergency_Panel.txt');
+                  apiClient.post('/api/reports/parse', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                    .then((res) => { setReportResult(res.data); setLoading(false); })
+                    .catch(() => setLoading(false));
+                }}
+                className="w-full text-left px-3 py-2 bg-slate-950 hover:bg-slate-800/80 border border-slate-800 rounded-xl text-xs text-rose-300 transition-colors flex items-center justify-between"
+              >
+                <span>ICU Pulmonary & Acute Sepsis Panel</span>
+                <span className="text-[10px] text-rose-400 font-mono">Elevated Flags</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl lg:col-span-2 space-y-6">
