@@ -1,0 +1,95 @@
+{
+  "model_metadata": {
+    "name": "Respiratory Rate Autonomic Regressor",
+    "version": "v1.0.0",
+    "calibration_dataset": "PhysioNet BIDMC PPG and Respiration Dataset",
+    "benchmark_protocol": "Group-K-Fold Subject Split (Zero Leakage)",
+    "target_metric": "Breaths per minute (br/min)",
+    "resting_adult_reference": "12 - 20 breaths/min"
+  },
+  "coefficients": {
+    "intercept": 16.216496226415096,
+    "weights": {
+      "resting_hr": 0.123147837328123,
+      "hrv_rmssd": -0.39031909363084094,
+      "stress_score": 0.21663642419646056,
+      "activity_factor": 1.399786145493206,
+      "age": -0.8265185077678148
+    },
+    "scaler_mean": {
+      "resting_hr": 70.09530188679244,
+      "hrv_rmssd": 47.03960377358491,
+      "stress_score": 35.07939622641509,
+      "activity_factor": 0.350822641509434,
+      "age": 54.867924528301884
+    },
+    "scaler_std": {
+      "resting_hr": 9.372036919931267,
+      "hrv_rmssd": 15.179354233772502,
+      "stress_score": 6.1318450633308075,
+      "activity_factor": 0.9160992761918779,
+      "age": 13.805984222083064
+    }
+  },
+  "cross_validation_performance": {
+    "mean_mae": 2.188,
+    "mean_rmse": 2.598,
+    "mean_r2": 0.243,
+    "mean_pearson_r": 0.537,
+    "mean_loa_lower": -4.93,
+    "mean_loa_upper": 5.089,
+    "calibrated_uncertainty_ci95": 5.01
+  },
+  "individual_folds": [
+    {
+      "mae": 2.085,
+      "rmse": 2.361,
+      "pearson_r": 0.66,
+      "r_squared": 0.374,
+      "bland_altman_bias": -0.68,
+      "bland_altman_loa_lower": -5.112,
+      "bland_altman_loa_upper": 3.751,
+      "calibrated_uncertainty_ci95": 4.43
+    },
+    {
+      "mae": 1.708,
+      "rmse": 2.134,
+      "pearson_r": 0.432,
+      "r_squared": 0.061,
+      "bland_altman_bias": 0.077,
+      "bland_altman_loa_lower": -4.102,
+      "bland_altman_loa_upper": 4.257,
+      "calibrated_uncertainty_ci95": 4.18
+    },
+    {
+      "mae": 1.726,
+      "rmse": 2.066,
+      "pearson_r": 0.706,
+      "r_squared": 0.466,
+      "bland_altman_bias": -0.034,
+      "bland_altman_loa_lower": -4.082,
+      "bland_altman_loa_upper": 4.014,
+      "calibrated_uncertainty_ci95": 4.05
+    },
+    {
+      "mae": 3.14,
+      "rmse": 3.613,
+      "pearson_r": 0.437,
+      "r_squared": 0.184,
+      "bland_altman_bias": 0.308,
+      "bland_altman_loa_lower": -6.748,
+      "bland_altman_loa_upper": 7.364,
+      "calibrated_uncertainty_ci95": 7.06
+    },
+    {
+      "mae": 2.283,
+      "rmse": 2.816,
+      "pearson_r": 0.452,
+      "r_squared": 0.132,
+      "bland_altman_bias": 0.728,
+      "bland_altman_loa_lower": -4.604,
+      "bland_altman_loa_upper": 6.059,
+      "calibrated_uncertainty_ci95": 5.33
+    }
+  ]
+}

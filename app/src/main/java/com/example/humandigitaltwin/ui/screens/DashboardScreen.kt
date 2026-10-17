@@ -233,6 +233,32 @@ fun DashboardScreen(
             }
         }
 
+        // Secondary Biometrics Row: Respiration & Glucose
+        item {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                QuickStatTile(
+                    icon = Icons.Rounded.Air,
+                    iconTint = Color(0xFF22D3EE),
+                    value = "${metrics?.respiratory_rate?.toInt() ?: 16} br/m",
+                    label = "Respiration (Resting)",
+                    onClick = onNavigateToVitals,
+                    modifier = Modifier.weight(1f)
+                )
+
+                QuickStatTile(
+                    icon = Icons.Rounded.Bolt,
+                    iconTint = Color(0xFF00E5BE),
+                    value = "${metrics?.blood_glucose?.toInt() ?: 92} mg/dL",
+                    label = "Blood Glucose",
+                    onClick = onNavigateToVitals,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
+
         // 4. Today's Focus Card (matching Screen 2 in reference)
         item {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {

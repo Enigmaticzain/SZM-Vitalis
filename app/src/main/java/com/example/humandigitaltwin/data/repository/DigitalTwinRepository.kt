@@ -89,7 +89,12 @@ class DigitalTwinRepository(private val context: Context? = null) {
                 steps = 6420,
                 sleep_hours = 7.8,
                 stress_level = 22.0,
-                energy_expenditure_kcal = 2150.0
+                energy_expenditure_kcal = 2150.0,
+                respiratory_rate = 15.5,
+                respiratory_rate_predicted = 15.8,
+                respiratory_rate_confidence = 94.2,
+                respiratory_rate_uncertainty = 1.2,
+                respiratory_rate_status = "Within Reference Range (12–20)"
             )
         }
     }
@@ -106,7 +111,12 @@ class DigitalTwinRepository(private val context: Context? = null) {
                 steps = if (spike) 7200 else 6500,
                 sleep_hours = 7.8,
                 stress_level = if (spike) 78.0 else 22.0,
-                energy_expenditure_kcal = if (spike) 2450.0 else 2150.0
+                energy_expenditure_kcal = if (spike) 2450.0 else 2150.0,
+                respiratory_rate = if (spike) 24.5 else 15.5,
+                respiratory_rate_predicted = if (spike) 24.8 else 15.8,
+                respiratory_rate_confidence = if (spike) 88.5 else 94.2,
+                respiratory_rate_uncertainty = if (spike) 1.8 else 1.2,
+                respiratory_rate_status = if (spike) "Above Reference Range (>20)" else "Within Reference Range (12–20)"
             )
         }
     }

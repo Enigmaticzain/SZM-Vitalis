@@ -11,7 +11,12 @@ data class WearableDataPoint(
     val steps: Int,
     val sleep_hours: Double,
     val stress_level: Double,
-    val energy_expenditure_kcal: Double
+    val energy_expenditure_kcal: Double,
+    val respiratory_rate: Double = 16.0,
+    val respiratory_rate_predicted: Double = 15.8,
+    val respiratory_rate_confidence: Double = 94.2,
+    val respiratory_rate_uncertainty: Double = 1.2,
+    val respiratory_rate_status: String = "Within Reference Range (12–20)"
 )
 
 @Serializable

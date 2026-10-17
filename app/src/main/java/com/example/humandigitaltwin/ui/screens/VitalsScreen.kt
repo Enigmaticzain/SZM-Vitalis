@@ -34,6 +34,8 @@ fun VitalsScreen(
     val heartRate = wearable?.heart_rate?.toInt() ?: 68
     val hrv = wearable?.hrv?.toInt() ?: 75
     val glucose = wearable?.blood_glucose?.toInt() ?: 101
+    val respiratoryRate = wearable?.respiratory_rate?.toInt() ?: 16
+    val respiratoryConfidence = wearable?.respiratory_rate_confidence ?: 94.2
 
     // Simulated 24-hour continuous biometric data points for the wave chart
     val wavePoints = remember(selectedTimeframe, heartRate) {
@@ -313,17 +315,22 @@ fun VitalsScreen(
         // Respiratory Rate Card
         item {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                val rrOptimal = respiratoryRate in 12..20
+                val rrBelow = respiratoryRate < 12
+                val rrColor = if (rrOptimal) Color(0xFF34D399) else if (rrBelow) Color(0xFFFBBF24) else Color(0xFFFF5252)
+                val rrStatus = if (rrOptimal) "Normal (12–20)" else if (rrBelow) "Below (<12)" else "Elevated (>20)"
+
                 VitalIndicatorCard(
                     title = "Respiratory Rate",
-                    value = "16 br/min",
-                    status = "Normal (12–20)",
-                    statusColor = Color(0xFF34D399),
+                    value = "$respiratoryRate br/min",
+                    status = rrStatus,
+                    statusColor = rrColor,
                     trailingIcon = Icons.Rounded.Air,
                     modifier = Modifier.weight(1f),
                     onClick = {
                         selectedMetricDetail = Triple(
                             "Respiratory Rate (Resting)",
-                            "16 breaths/min (Predicted ±1.2 br/min)",
+                            "$respiratoryRate breaths/min (Predicted ±1.2 br/min)",
                             "Resting adult physiological range is 12–20 breaths per minute. Predicted via Autonomic Coupling Model v1.0 (calibrated on PhysioNet BIDMC / CapnoBase benchmark). Context such as exercise, fever, or sleep dynamically alters respiratory rates. Respiratory rate alone does not diagnose respiratory disease."
                         )
                     }
@@ -331,7 +338,7 @@ fun VitalsScreen(
 
                 VitalIndicatorCard(
                     title = "Model Confidence",
-                    value = "94.2%",
+                    value = "${respiratoryConfidence.toInt()}%",
                     status = "Calibrated",
                     statusColor = Color(0xFF38BDF8),
                     trailingIcon = Icons.Rounded.Shield,
@@ -339,7 +346,7 @@ fun VitalsScreen(
                     onClick = {
                         selectedMetricDetail = Triple(
                             "Respiratory Model Calibration",
-                            "94.2% Reliability (MAE 1.42 br/min)",
+                            "$respiratoryConfidence% Reliability (MAE 1.42 br/min)",
                             "Inference uncertainty is strictly bounded at ±1.2 breaths/min with cross-subject validation against gold-standard capnography reference curves."
                         )
                     }

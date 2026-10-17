@@ -37,11 +37,13 @@ fun AnatomicalScreen(
     var selectedTab by remember { mutableStateOf(0) } // 0: Body Systems, 1: 3D View
     var selectedSystem by remember { mutableStateOf<OrganSystem?>(null) }
 
+    val liveRR = twinState?.latest_metrics?.respiratory_rate?.toInt() ?: 16
+
     val systems = listOf(
         OrganSystem("Brain", 94, Icons.Rounded.Psychology, Color(0xFF818CF8), "Cognitive readiness optimal. High autonomic parasympathetic tone recorded during REM cycle."),
         OrganSystem("Cardiovascular", 92, Icons.Rounded.Favorite, Color(0xFFFF5252), "Resting heart rate 64 bpm, HRV 74 ms. Arterial elasticity and pulse pressure optimal."),
         OrganSystem("Metabolic", 88, Icons.Rounded.Bolt, Color(0xFF00E5BE), "Fasting glucose 92 mg/dL. Postprandial glucose excursions safely buffer within target envelope."),
-        OrganSystem("Respiratory", 96, Icons.Rounded.Air, Color(0xFF38BDF8), "SpO2 98%, resting respiratory rate 14 breaths/min. Pulmonary gas exchange efficient."),
+        OrganSystem("Respiratory", 96, Icons.Rounded.Air, Color(0xFF38BDF8), "SpO2 98%, resting respiratory rate $liveRR breaths/min. Pulmonary gas exchange efficient."),
         OrganSystem("Musculoskeletal", 90, Icons.Rounded.FitnessCenter, Color(0xFFFBBF24), "Recovery phase active. Micro-repair ongoing post physical activity."),
         OrganSystem("Immune", 89, Icons.Rounded.Shield, Color(0xFFA78BFA), "hs-CRP at 0.8 mg/L. Autonomic stress index low, cellular immunity balanced.")
     )

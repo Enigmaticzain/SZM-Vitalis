@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchWearableData, simulateWearable } from '@/lib/api';
 import { WearableData } from '@/lib/types';
 import VitalCard from '@/components/VitalCard';
-import { Heart, Activity, Zap, Footprints, Play, RefreshCw } from 'lucide-react';
+import { Heart, Activity, Zap, Footprints, Play, RefreshCw, Wind } from 'lucide-react';
 
 export default function SimulatorPage() {
   const [data, setData] = useState<WearableData | null>(null);
@@ -55,11 +55,12 @@ export default function SimulatorPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
         <VitalCard title="Heart Rate" value={data?.heart_rate ?? 0} unit="bpm" icon={Heart} statusColor="text-rose-400" />
         <VitalCard title="HRV" value={data?.hrv ?? 0} unit="ms" icon={Activity} statusColor="text-emerald-400" />
         <VitalCard title="Blood Glucose" value={data?.blood_glucose ?? 0} unit="mg/dL" icon={Zap} statusColor="text-amber-400" />
-        <VitalCard title="Steps" value={data?.steps ?? 0} unit="steps" icon={Footprints} statusColor="text-cyan-400" />
+        <VitalCard title="Respiratory Rate" value={data?.respiratory_rate ?? 16} unit="br/min" icon={Wind} statusColor="text-cyan-400" description={data?.respiratory_rate_status ?? "Optimal Resting"} />
+        <VitalCard title="Steps" value={data?.steps ?? 0} unit="steps" icon={Footprints} statusColor="text-indigo-400" />
       </div>
 
       <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl">
